@@ -26,4 +26,23 @@ public class Leer {
         }
         return Vuelos;
     }
+
+    public static int readTripulaciones(String csvFile){
+        try {
+            File file = new File(csvFile);
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            String line = " ";
+            int contador = 0;
+            while ((line = br.readLine()) != null) {
+                contador++;
+            }
+            br.close();
+
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return contador;
+    }
+
 }

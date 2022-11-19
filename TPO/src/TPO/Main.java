@@ -10,6 +10,8 @@ public class Main {
         for (Vuelos vuelos : v) {
             System.out.println(vuelos.getAll());
         }
+        String csvFile2 = "C:\\Users\\Marcos\\Downloads\\Tripulaciones.csv"
+        int CantTripulaciones = Leer.readTripulaciones(csvFile2)
 
     }
 }
