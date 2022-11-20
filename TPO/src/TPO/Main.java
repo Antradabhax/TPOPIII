@@ -21,7 +21,7 @@ public class Main {
 
         for (int i = 0; i<Tripulaciones.getTripulaciones();i++){
             VuelosResultado.InicializarVuelosCostoTripulacion(); //REINICIALIZAMOS EL OBJETO A VALORES SIN NADA Y 0
-            VuelosResultado = BacktrackingVuelos.BV(GV,Tripulaciones.getTripulaciones(),Tripulaciones.getOrigen(),VuelosResultado,GastoTotal);
+            VuelosResultado = BacktrackingVuelos.BV(GV,Tripulaciones.getTripulaciones(),Tripulaciones.getOrigen(),VuelosResultado, );
             //EL CODIGO DE BACKTRACKING DEVUELVE UN OBJETO QUE TIENE LOS VUELOS QUE TOMO LA TRIPULACION Y EL COSTO QUE PRESENTO LA TRIPULACION
 
             //MOSTRADO DE RESULTADO

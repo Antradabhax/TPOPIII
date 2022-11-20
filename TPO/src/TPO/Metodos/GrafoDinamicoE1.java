@@ -4,13 +4,14 @@ import TPO.Intefaz.InterfazConjunto;
 import TPO.Intefaz.InterfazGrafo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class GrafoDinamicoE1 implements InterfazGrafo {
     class NodoArista {
-        String inicio;
+        Date inicio;
 
-        String fin;
+        Date fin;
         NodoGrafo nodoDestino;
         NodoArista sigArista;
     }
@@ -69,7 +70,7 @@ public class GrafoDinamicoE1 implements InterfazGrafo {
         return aux;
     }
 
-    public void AgregarAristas(String v1, String v2, String inicio, String fin) {
+    public void AgregarAristas(String v1, String v2, Date inicio, Date fin) {
         NodoGrafo n1 = Vert2Nodo(v1);
         NodoGrafo n2 = Vert2Nodo(v2);
         NodoArista aux = new NodoArista();
@@ -85,13 +86,13 @@ public class GrafoDinamicoE1 implements InterfazGrafo {
         EliminarAristaNodo(n1, v2);
     }
 
-    public List<String> FechaArista(String v1, String v2) {
+    public List<Date> FechaArista(String v1, String v2) {
         NodoGrafo n1 = Vert2Nodo(v1);
         NodoArista aux = n1.arista;
         while (aux.nodoDestino.nodo != v2){
             aux = aux.sigArista;
         }
-        List<String> A = new ArrayList<String>();
+        List<Date> A = new ArrayList<Date>();
         A.set(0, aux.inicio);
         A.set(1, aux.fin);
         return A;
