@@ -1,13 +1,12 @@
 package TPO;
-
 import TPO.Intefaz.InterfazGrafo;
 
+import java.util.Date;
 import java.util.List;
 
 public class BacktrackingVuelos() {
-   public static VuelosCostoTripulacion BV(InterfazGrafo GVuelos, int cantTrip, String AeropuertoOrigen, VuelosCostoTripulacion Valor, int GastoTotal){
-
-      if (visitados.capacidad() == grafo.vertices().capacidad()) {
+   public static VuelosCostoTripulacion BV(InterfazGrafo GVuelos, int cantTrip, String AeropuertoOrigen, VuelosCostoTripulacion Valor, int GastoTotal, Date horarioActual){
+       if (visitados.capacidad() == grafo.vertices().capacidad()) {
          solucionActual.agregarElemento(etapa + 1, solucionActual.recuperarElemento(0));
          costoActual = calcularCosto(grafo, solucionActual);
          if (costoActual < mejorCosto) {

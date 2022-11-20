@@ -1,19 +1,27 @@
 package TPO;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 public class Vuelos {
     private String NumeroVuelo;
     private String AeropuertoOrigen;
     private String AeropuertoDestino;
-    private String inicio;
-    private String fin;
+    private Date inicio;
+    private Date fin;
 
-    public Vuelos(String numeroVuelo, String aeropuertoOrigen, String aeropuertoDestino, String inicio, String fin) {
-        NumeroVuelo = numeroVuelo;
-        AeropuertoOrigen = aeropuertoOrigen;
-        AeropuertoDestino = aeropuertoDestino;
-        this.inicio = inicio;
-        this.fin = fin;
+    public Vuelos() {
+        this.NumeroVuelo = "";
+        this.AeropuertoOrigen = "";
+        this.AeropuertoDestino = "";
+        this.inicio = null;
+        this.fin = null;
     }
+
+
 
     public String getNumeroVuelo() {
         return NumeroVuelo;
@@ -39,20 +47,26 @@ public class Vuelos {
         AeropuertoDestino = aeropuertoDestino;
     }
 
-    public String getInicio() {
+    public Date getInicio() {
         return inicio;
     }
 
-    public void setInicio(String inicio) {
-        this.inicio = inicio;
+    public void setInicio(String inicio) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        Date calDate = format.parse(inicio);
+        System.out.println(calDate.getHours() + ":" + calDate.getMinutes());
+        this.inicio = calDate;
     }
 
-    public String getFin() {
+    public Date getFin() {
         return fin;
     }
 
-    public void setFin(String fin) {
-        this.fin = fin;
+    public void setFin(String fin) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        Date calDate = format.parse(fin);
+        System.out.println(calDate.getHours() + ":" + calDate.getMinutes());
+        this.fin = calDate;
     }
 
     public String getAll(){

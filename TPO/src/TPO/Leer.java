@@ -1,5 +1,6 @@
 package TPO;
 import java.io. * ;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,13 +17,20 @@ public class Leer {
             Vuelos = new ArrayList<Vuelos>();
             while ((line = br.readLine()) != null) {
                 tempArr = line.split(delimiter);
-                Vuelos vuelo = new Vuelos(tempArr[0], tempArr[1], tempArr[2], tempArr[3], tempArr[4]);
+                Vuelos vuelo = new Vuelos();
+                vuelo.setNumeroVuelo(tempArr[0]);
+                vuelo.setAeropuertoOrigen(tempArr[1]);
+                vuelo.setAeropuertoDestino(tempArr[2]);
+                vuelo.setInicio(tempArr[3]);
+                vuelo.setFin(tempArr[4]);
                 Vuelos.add(vuelo);
             }
             br.close();
 
         } catch (IOException ioe) {
             ioe.printStackTrace();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
         return Vuelos;
     }
@@ -34,15 +42,15 @@ public class Leer {
             int i =0;
             File file = new File(csvFile);
             FileReader fr = new FileReader(file);
-            BufferedReader br = new BufferedReader(fr);
+            BufferedReader br2 = new BufferedReader(fr);
             String line = " ";
             String[] tempArr;
-            while ((line = br.readLine()) != null) {
+            while ((line = br2.readLine()) != null) {
                 i++;
                 tempArr = line.split(delimiter);
                 O = tempArr[1];
             }
-            br.close();
+            br2.close();
             TO.setTripulaciones(i);
             TO.setOrigen(O);
 
