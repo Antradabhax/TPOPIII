@@ -27,22 +27,29 @@ public class Leer {
         return Vuelos;
     }
 
-    public static int readTripulaciones(String csvFile){
+    public static TripulacionesOrigen readTripulaciones(String csvFile) {
+        TripulacionesOrigen TO = new TripulacionesOrigen();
+        String O = " ";
         try {
+            int i =0;
             File file = new File(csvFile);
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             String line = " ";
-            int contador = 0;
+            String[] tempArr;
             while ((line = br.readLine()) != null) {
-                contador++;
+                i++;
+                tempArr = line.split(delimiter);
+                O = tempArr[1];
             }
             br.close();
+            TO.setTripulaciones(i);
+            TO.setOrigen(O);
 
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-        return contador;
+        return TO;
     }
 
 }
