@@ -8,17 +8,21 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        //csv file to read
-        String csvFile = "C:\\Users\\Marcos\\Downloads\\Vuelos.csv";
+        String csvFile = "Vuelos.csv";
         List<Vuelos> v = Leer.read(csvFile);
-        String csvFile2 = "C:\\Users\\Marcos\\Downloads\\Tripulaciones.csv";
+        String csvFile2 = "Tripulaciones.csv";
         TripulacionesOrigen Tripulaciones = Leer.readTripulaciones(csvFile2);//DE DONDE SALE CADA TRIPULACION Y CUANTAS SON
+
         InterfazGrafo GV = CrearGrafoVuelos(v);//GRAFO DE AEROPUERTOS
+
         List<String> AeropuertosActuales = new ArrayList<String>();//LISTA DE AEROPUERTOS ACTUALES
+
         Vuelos[][] Viajes = new Vuelos[Tripulaciones.getTripulaciones()][];//DEVOLUCION DEL CODIGO
+
         for (int i = 0; i< Tripulaciones.getTripulaciones();i++){
             AeropuertosActuales.add(Tripulaciones.getOrigen());
-        }
+        }//relleno de aeropuertos de origen de cada tripulacion
+
         Vuelos[][] VuelosResultado = BacktrackingVuelos.BV(GV,Tripulaciones.getTripulaciones(),Tripulaciones.getOrigen(),AeropuertosActuales,Viajes);
         //EL CODIGO DE BACKTRACKING DEVUELVE UNA MATRIZ DE VUELOS
         //PODRIA REQUERIR CAMBIOS...
