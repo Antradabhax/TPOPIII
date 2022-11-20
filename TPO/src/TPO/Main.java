@@ -3,6 +3,7 @@ package TPO;
 import TPO.Intefaz.InterfazGrafo;
 import TPO.Metodos.GrafoDinamicoE1;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -11,9 +12,14 @@ public class Main {
         String csvFile = "C:\\Users\\Marcos\\Downloads\\Vuelos.csv";
         List<Vuelos> v = Leer.read(csvFile);
         String csvFile2 = "C:\\Users\\Marcos\\Downloads\\Tripulaciones.csv";
-        TripulacionesOrigen Tripulaciones = Leer.readTripulaciones(csvFile2);
-        InterfazGrafo GV = CrearGrafoVuelos(v);
-        Vuelos[][] VuelosResultado = BacktrackingVuelos.BV(GV,Tripulaciones.getTripulaciones(),Tripulaciones.getOrigen());
+        TripulacionesOrigen Tripulaciones = Leer.readTripulaciones(csvFile2);//DE DONDE SALE CADA TRIPULACION Y CUANTAS SON
+        InterfazGrafo GV = CrearGrafoVuelos(v);//GRAFO DE AEROPUERTOS
+        List<String> AeropuertosActuales = new ArrayList<String>();//LISTA DE AEROPUERTOS ACTUALES
+        Vuelos[][] Viajes = new Vuelos[Tripulaciones.getTripulaciones()][];//DEVOLUCION DEL CODIGO
+        for (int i = 0; i< Tripulaciones.getTripulaciones();i++){
+            AeropuertosActuales.add(Tripulaciones.getOrigen());
+        }
+        Vuelos[][] VuelosResultado = BacktrackingVuelos.BV(GV,Tripulaciones.getTripulaciones(),Tripulaciones.getOrigen(),AeropuertosActuales,Viajes);
         //EL CODIGO DE BACKTRACKING DEVUELVE UNA MATRIZ DE VUELOS
         //PODRIA REQUERIR CAMBIOS...
 
