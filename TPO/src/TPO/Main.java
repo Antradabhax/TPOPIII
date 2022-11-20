@@ -27,9 +27,12 @@ public class Main {
             //MOSTRADO DE RESULTADO
             for (int j = 0; j< VuelosResultado.getVuelosTomados().size(); j++){
                 System.out.print(VuelosResultado.getVuelosTomados().get(j) + " ");
+                GV.EliminarArista();
             }
             System.out.println();
             System.out.println("El costo de esta tripulacion es de: "+ VuelosResultado.getCostoTripulacion());
+
+            //PRODUCIR UN BORRADO DE LOS VUELOS YA TOMADOS...
         }
 
     }
