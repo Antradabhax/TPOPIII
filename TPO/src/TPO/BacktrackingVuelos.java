@@ -5,16 +5,15 @@ import java.util.Date;
 import java.util.List;
 
 public class BacktrackingVuelos() {
-   public static VuelosCostoTripulacion BV(InterfazGrafo GVuelos, int cantTrip, String AeropuertoOrigen, VuelosCostoTripulacion SolucionActual, Date horarioActual){
-       //SOLUCION ACTUAL PRESENTA LA LISTA DE VUELOS TOMADOS Y E GASTO QUE CONLLEVA
-
+   public static VuelosCostoTripulacion BV(InterfazGrafo GVuelos, String AeropuertoOrigen, VuelosCostoTripulacion SolucionActual){
+       //SOLUCION ACTUAL PRESENTA LA LISTA DE VUELOS TOMADOS Y EL GASTO QUE CONLLEVA (horas extra)
 
 
        if (visitados.capacidad() == grafo.vertices().capacidad()) {
          solucionActual.agregarElemento(etapa + 1, solucionActual.recuperarElemento(0));
          costoActual = calcularCosto(grafo, solucionActual);
          if (costoActual < mejorCosto) {
-            // mejorSolucion = solucionActual; Descomentar si necesitamos el recorrido
+            mejorSolucion = solucionActual;
             mejorCosto = costoActual;
          }
       } else {
@@ -28,6 +27,6 @@ public class BacktrackingVuelos() {
             }
          }
       }
-      return mejorCosto;
+      return SolucionActual;
    }
 }
