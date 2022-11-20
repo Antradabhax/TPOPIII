@@ -15,18 +15,22 @@ public class Main {
 
         InterfazGrafo GV = CrearGrafoVuelos(v);//GRAFO DE AEROPUERTOS
 
-        List<String> AeropuertosActuales = new ArrayList<String>();//LISTA DE AEROPUERTOS ACTUALES
+        int GastoTotal = 0;
 
-        Vuelos[][] Viajes = new Vuelos[Tripulaciones.getTripulaciones()][];//DEVOLUCION DEL CODIGO
+        VuelosCostoTripulacion VuelosResultado = new VuelosCostoTripulacion();//INICIAMOS LA VARIABLE DE DEVOLUCION
 
-        for (int i = 0; i< Tripulaciones.getTripulaciones();i++){
-            AeropuertosActuales.add(Tripulaciones.getOrigen());
-        }//relleno de aeropuertos de origen de cada tripulacion
+        for (int i = 0; i<Tripulaciones.getTripulaciones();i++){
+            VuelosResultado.InicializarVuelosCostoTripulacion(); //REINICIALIZAMOS EL OBJETO A VALORES SIN NADA Y 0
+            VuelosResultado = BacktrackingVuelos.BV(GV,Tripulaciones.getTripulaciones(),Tripulaciones.getOrigen(),VuelosResultado,GastoTotal);
+            //EL CODIGO DE BACKTRACKING DEVUELVE UN OBJETO QUE TIENE LOS VUELOS QUE TOMO LA TRIPULACION Y EL COSTO QUE PRESENTO LA TRIPULACION
 
-        Vuelos[][] VuelosResultado = BacktrackingVuelos.BV(GV,Tripulaciones.getTripulaciones(),Tripulaciones.getOrigen(),AeropuertosActuales,Viajes);
-        //EL CODIGO DE BACKTRACKING DEVUELVE UNA MATRIZ DE VUELOS
-        //PODRIA REQUERIR CAMBIOS...
-
+            //MOSTRADO DE RESULTADO
+            for (int j = 0; j< VuelosResultado.getVuelosTomados().size(); j++){
+                System.out.print(VuelosResultado.getVuelosTomados().get(j) + " ");
+            }
+            System.out.println();
+            System.out.println("El costo de esta tripulacion es de: "+ VuelosResultado.getCostoTripulacion());
+        }
 
     }
 
