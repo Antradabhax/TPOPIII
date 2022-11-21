@@ -50,7 +50,7 @@ public class Main {
             }
             for (Vuelos vuelos : v) {
                 if (vuelos.getAeropuertoOrigen() == VUELO.getAeropuertoOrigen()) {
-                    GV.AgregarAristas(VUELO.getAeropuertoOrigen(), VUELO.getAeropuertoDestino(), VUELO.getInicio(), VUELO.getFin());
+                    GV.AgregarAristas(VUELO.getAeropuertoOrigen(), VUELO.getAeropuertoDestino(), vuelos);
                 }
             }
         }

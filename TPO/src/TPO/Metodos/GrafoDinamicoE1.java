@@ -2,16 +2,16 @@ package TPO.Metodos;
 
 import TPO.Intefaz.InterfazConjunto;
 import TPO.Intefaz.InterfazGrafo;
+import TPO.Vuelos;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class GrafoDinamicoE1 implements InterfazGrafo {
     class NodoArista {
-        Date inicio;
-
-        Date fin;
+        Vuelos Vuelo;
         NodoGrafo nodoDestino;
         NodoArista sigArista;
     }
@@ -70,12 +70,11 @@ public class GrafoDinamicoE1 implements InterfazGrafo {
         return aux;
     }
 
-    public void AgregarAristas(String v1, String v2, Date inicio, Date fin) {
+    public void AgregarAristas(String v1, String v2, Vuelos Vuelo) {
         NodoGrafo n1 = Vert2Nodo(v1);
         NodoGrafo n2 = Vert2Nodo(v2);
         NodoArista aux = new NodoArista();
-        aux.inicio = inicio;
-        aux.fin = fin;
+        aux.Vuelo = Vuelo;
         aux.nodoDestino = n2;
         aux.sigArista = n1.arista;
         n1.arista = aux;
@@ -86,15 +85,17 @@ public class GrafoDinamicoE1 implements InterfazGrafo {
         EliminarAristaNodo(n1, v2);
     }
 
-    public List<Date> FechaArista(String v1, String v2) {
+    public Vuelos VueloArista(String v1, String v2) throws ParseException {
         NodoGrafo n1 = Vert2Nodo(v1);
         NodoArista aux = n1.arista;
         while (aux.nodoDestino.nodo != v2){
             aux = aux.sigArista;
         }
-        List<Date> A = new ArrayList<Date>();
-        A.set(0, aux.inicio);
-        A.set(1, aux.fin);
+        Vuelos A = new Vuelos();
+        A.setAeropuertoOrigen(aux.Vuelo.getAeropuertoOrigen());
+        A.setAeropuertoDestino(aux.Vuelo.getAeropuertoDestino());
+        A.setInicioConDate(aux.Vuelo.getInicio());
+        A.setFinConDate(aux.Vuelo.getFin());
         return A;
     }
 

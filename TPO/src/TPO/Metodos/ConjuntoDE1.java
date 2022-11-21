@@ -50,6 +50,16 @@ public class ConjuntoDE1 implements InterfazConjunto {
         return (aux != null);
     }
 
+    public int Size() {
+        Nodo aux = c;
+        int i = 0;
+        while (aux != null){
+            aux = aux.sig;
+        i++;
+        }
+        return i;
+    }
+
     public boolean ConjuntoVacio() {
         return (c == null);
     }

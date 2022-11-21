@@ -7,4 +7,6 @@ public interface InterfazConjunto {
     boolean ConjuntoVacio();
     void Sacar(String x);
     boolean Pertenece(String x);
+
+    int Size();
 }

@@ -1,32 +1,40 @@
 package TPO;
+import TPO.Intefaz.InterfazConjunto;
 import TPO.Intefaz.InterfazGrafo;
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class BacktrackingVuelos() {
-   public static VuelosCostoTripulacion BV(InterfazGrafo GVuelos, String AeropuertoOrigen, VuelosCostoTripulacion SolucionActual){
-       //SOLUCION ACTUAL PRESENTA LA LISTA DE VUELOS TOMADOS Y EL GASTO QUE CONLLEVA (horas extra)
+   public static VuelosCostoTripulacion BV(InterfazGrafo GVuelos, String AeropuertoOrigen, List<Vuelos> VuelosTomados, int CostoA, int MejorCosto, int largoA, int MejorLargo, String AeropuetoActual, VuelosCostoTripulacion MejorSolucion, VuelosCostoTripulacion SolucionActual, Date HoraActual) throws ParseException {
 
+           if (AeropuetoActual == AeropuertoOrigen && largoA <0){
+               SolucionActual.setVuelosTomados(VuelosTomados);
+               SolucionActual.setCostoTripulacion(CostoA);
+               if (largoA >= MejorLargo && CostoA < MejorCosto){
+               }
 
-       if (visitados.capacidad() == grafo.vertices().capacidad()) {
-         solucionActual.agregarElemento(etapa + 1, solucionActual.recuperarElemento(0));
-         costoActual = calcularCosto(grafo, solucionActual);
-         if (costoActual < mejorCosto) {
-            mejorSolucion = solucionActual;
-            mejorCosto = costoActual;
-         }
-      } else {
-         VectorTDA<E> adyacentes = grafo.adyacentes(actual).aVector();
-         for (int i = 0; i< adyacentes.capacidadVector(); i++) {
-            E vecino = adyacentes.recuperarElemento(i);
-            if (!visitados.pertenece(vecino)) {
-               visitados.agregar(vecino);
-               mejorCosto = tsp(grafo, vecino, visitados, solucionActual, costoActual, mejorSolucion, mejorCosto,etapa + 1);
-               visitados.sacar(vecino);
-            }
-         }
-      }
-      return SolucionActual;
+           }else{
+               InterfazConjunto Aeropuertos = GVuelos.Vertices();
+               List<Vuelos> Posibles = new ArrayList<Vuelos>();
+               for (int i = 0; i < Aeropuertos.Size();i++){
+                   if (GVuelos.ExisteArista(AeropuetoActual, Aeropuertos.Elegir())){
+                       Posibles.add(GVuelos.VueloArista(AeropuetoActual,Aeropuertos.Elegir()));
+                       }
+                   Aeropuertos.Sacar(Aeropuertos.Elegir());
+                   }
+               for (int l = 0; l < Posibles.size(); l++){
+                   if (BacktrackingVuelos.getDateDiff(Posibles.get(l).getInicio(), HoraActual)+2 < CostoA){
+                       
+                   }
+               }
+           }
+       return MejorSolucion;
    }
+
+    public static long getDateDiff(Date date1, Date date2) {
+        return date2.getTime() - date1.getTime();
+    }
 }

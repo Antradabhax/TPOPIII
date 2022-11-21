@@ -58,6 +58,11 @@ public class Vuelos {
         this.inicio = calDate;
     }
 
+    public void setInicioConDate(Date inicio) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        this.inicio = inicio;
+    }
+
     public Date getFin() {
         return fin;
     }
@@ -67,6 +72,11 @@ public class Vuelos {
         Date calDate = format.parse(fin);
         System.out.println(calDate.getHours() + ":" + calDate.getMinutes());
         this.fin = calDate;
+    }
+
+    public void setFinConDate(Date fin) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        this.fin = fin;
     }
 
     public String getAll(){
