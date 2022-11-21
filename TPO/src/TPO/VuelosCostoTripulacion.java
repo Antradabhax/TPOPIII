@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VuelosCostoTripulacion {
-    List<Vuelos> VuelosTomados;
+    Vuelos[][] VuelosTomados;
     int CostoTripulacion;
 
-    public void InicializarVuelosCostoTripulacion(){
-        VuelosTomados = new ArrayList<Vuelos>();
+    public void InicializarVuelosCostoTripulacion(int CantTrip){
+        VuelosTomados = new Vuelos[CantTrip][];
         CostoTripulacion = 0;
     }
 
-    public List<Vuelos> getVuelosTomados() {
+    public Vuelos[][] getVuelosTomados() {
         return VuelosTomados;
     }
 
-    public void setVuelosTomados(List<Vuelos> vuelosTomados) {
+    public void setVuelosTomados(Vuelos[][] vuelosTomados) {
         VuelosTomados = vuelosTomados;
     }
 

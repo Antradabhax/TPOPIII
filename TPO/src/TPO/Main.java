@@ -20,20 +20,15 @@ public class Main {
 
         VuelosCostoTripulacion VuelosResultado = new VuelosCostoTripulacion();//INICIAMOS LA VARIABLE DE DEVOLUCION
 
-
-        for (int i = 0; i<Tripulaciones.getTripulaciones();i++){
-            VuelosResultado.InicializarVuelosCostoTripulacion(); //REINICIALIZAMOS EL OBJETO A VALORES SIN NADA Y 0
-            VuelosResultado = BacktrackingVuelos.BV(GV,Tripulaciones.getOrigen(),VuelosResultado);
+        VuelosResultado.InicializarVuelosCostoTripulacion(Tripulaciones.getTripulaciones()); //REINICIALIZAMOS EL OBJETO A VALORES SIN NADA Y 0
+        VuelosResultado = BacktrackingVuelos.BV(GV,Tripulaciones.getOrigen(),VuelosResultado);
             //EL CODIGO DE BACKTRACKING DEVUELVE UN OBJETO QUE TIENE LOS VUELOS QUE TOMO LA TRIPULACION Y EL COSTO QUE PRESENTO LA TRIPULACION
 
             //MOSTRADO DE RESULTADO
-            for (int j = 0; j< VuelosResultado.getVuelosTomados().size(); j++){
-                System.out.print(VuelosResultado.getVuelosTomados().get(j) + " ");
-                GV.EliminarArista(VuelosResultado.getVuelosTomados().get(j).getAeropuertoOrigen(),VuelosResultado.getVuelosTomados().get(j).getAeropuertoDestino());
-            }
-            System.out.println();
-            System.out.println("El costo de esta tripulacion es de: "+ VuelosResultado.getCostoTripulacion());
-        }
+
+        System.out.println();
+        System.out.println("El costo de esta tripulacion es de: "+ VuelosResultado.getCostoTripulacion());
+
 
     }
 
