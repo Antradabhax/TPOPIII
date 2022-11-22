@@ -15,6 +15,13 @@ public class Main {
         TripulacionesOrigen Tripulaciones = Leer.readTripulaciones(csvFile2);//DE DONDE SALE CADA TRIPULACION Y CUANTAS SON
 
         InterfazGrafo GV = CrearGrafoVuelos(v);//GRAFO DE AEROPUERTOS
+        List<Tripulacion> ListaTripulaciones = new ArrayList<>();
+        for (int i = 0; i< Tripulaciones.getTripulaciones(); i++){//la posicion el la lista es el identificador
+            Tripulacion T = new Tripulacion();
+            ListaTripulaciones.add(T);
+        }
+
+
 
         int GastoTotal = 0;
 

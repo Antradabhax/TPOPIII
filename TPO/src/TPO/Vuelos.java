@@ -2,6 +2,8 @@ package TPO;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -10,8 +12,8 @@ public class Vuelos {
     private String NumeroVuelo;
     private String AeropuertoOrigen;
     private String AeropuertoDestino;
-    private Date inicio;
-    private Date fin;
+    private LocalDateTime inicio;
+    private LocalDateTime fin;
 
     public Vuelos() {
         this.NumeroVuelo = "";
@@ -47,15 +49,13 @@ public class Vuelos {
         AeropuertoDestino = aeropuertoDestino;
     }
 
-    public Date getInicio() {
+    public LocalDateTime getInicio() {
         return inicio;
     }
 
     public void setInicio(String inicio) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        Date calDate = format.parse(inicio);
-        System.out.println(calDate.getHours() + ":" + calDate.getMinutes());
-        this.inicio = calDate;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        this.inicio = LocalDateTime.parse(inicio,format);
     }
 
     public void setInicioConDate(Date inicio) throws ParseException {
@@ -63,15 +63,13 @@ public class Vuelos {
         this.inicio = inicio;
     }
 
-    public Date getFin() {
+    public LocalDateTime getFin() {
         return fin;
     }
 
     public void setFin(String fin) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        Date calDate = format.parse(fin);
-        System.out.println(calDate.getHours() + ":" + calDate.getMinutes());
-        this.fin = calDate;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        this.fin = LocalDateTime.parse(fin,format);
     }
 
     public void setFinConDate(Date fin) throws ParseException {
