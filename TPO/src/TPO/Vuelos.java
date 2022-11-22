@@ -59,8 +59,8 @@ public class Vuelos {
     }
 
     public void setInicioConDate(Date inicio) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        this.inicio = inicio;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        this.inicio = LocalDateTime.parse(inicio,format);
     }
 
     public LocalDateTime getFin() {
