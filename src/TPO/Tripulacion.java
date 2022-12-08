@@ -1,6 +1,5 @@
 package TPO;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class Tripulacion {
@@ -14,7 +13,6 @@ public class Tripulacion {
         VuelosAsignados = vuelosAsignados;
     }
 
-
     public int getIdentificadorTripulacion() {
         return IdentificadorTripulacion;
     }
@@ -22,5 +20,4 @@ public class Tripulacion {
     public void agregarAlistaDeVuelos(Vuelos V){
         VuelosAsignados.add(V);
     }
-
 }

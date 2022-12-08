@@ -1,12 +1,8 @@
 package TPO;
 
-import java.time.Duration;
-import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.text.ParseException;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 public class Resultado {
 
@@ -14,12 +10,10 @@ public class Resultado {
 
     public Resultado(){
         this.CopiaTripulaciones = new ArrayList<>();
-
     }
 
     public void setCopiaTripulaciones(List<Tripulacion> ListaTripulaciones){
         List<Tripulacion> nuevo = new ArrayList<>();
-
         if (ListaTripulaciones.size() != 0){
             for (Tripulacion t: ListaTripulaciones){
                 List<Vuelos> v = new ArrayList<>(t.VuelosAsignados);
@@ -28,9 +22,6 @@ public class Resultado {
             }
             this.CopiaTripulaciones = nuevo;
         }
-
-
-
     }
 
     public void agregar(Asignacion A, int Identificador){

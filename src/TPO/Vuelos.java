@@ -18,9 +18,6 @@ public class Vuelos {
         this.inicio = null;
         this.fin = null;
     }
-
-
-
     public String getNumeroVuelo() {
 
         return NumeroVuelo;
