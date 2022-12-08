@@ -26,39 +26,41 @@ public class Vuelos {
 
 
     public String getNumeroVuelo() {
+
         return NumeroVuelo;
     }
 
     public void setNumeroVuelo(String numeroVuelo) {
+
         NumeroVuelo = numeroVuelo;
     }
 
     public String getAeropuertoOrigen() {
+
         return AeropuertoOrigen;
     }
 
     public void setAeropuertoOrigen(String aeropuertoOrigen) {
+
         AeropuertoOrigen = aeropuertoOrigen;
     }
 
     public String getAeropuertoDestino() {
+
         return AeropuertoDestino;
     }
 
     public void setAeropuertoDestino(String aeropuertoDestino) {
+
         AeropuertoDestino = aeropuertoDestino;
     }
 
     public LocalDateTime getInicio() {
+
         return inicio;
     }
 
     public void setInicio(String inicio) throws ParseException {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        this.inicio = LocalDateTime.parse(inicio,format);
-    }
-
-    public void setInicioConDate(Date inicio) throws ParseException {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         this.inicio = LocalDateTime.parse(inicio,format);
     }
@@ -70,11 +72,6 @@ public class Vuelos {
     public void setFin(String fin) throws ParseException {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         this.fin = LocalDateTime.parse(fin,format);
-    }
-
-    public void setFinConDate(Date fin) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        this.fin = fin;
     }
 
     public String getAll(){

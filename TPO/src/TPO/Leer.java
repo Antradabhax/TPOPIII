@@ -7,14 +7,14 @@ import java.util.List;
 public class Leer {
     public static final String delimiter = ",";
     public static List<Vuelos> read(String csvFile) {
-        List<Vuelos> Vuelos = null;
+        List<Vuelos> ListaVuelos = null;
         try {
             File file = new File(csvFile);
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             String line = " ";
             String[] tempArr;
-            Vuelos = new ArrayList<Vuelos>();
+            ListaVuelos = new ArrayList<Vuelos>();
             while ((line = br.readLine()) != null) {
                 tempArr = line.split(delimiter);
                 Vuelos vuelo = new Vuelos();
@@ -23,7 +23,7 @@ public class Leer {
                 vuelo.setAeropuertoDestino(tempArr[2]);
                 vuelo.setInicio(tempArr[3]);
                 vuelo.setFin(tempArr[4]);
-                Vuelos.add(vuelo);
+                ListaVuelos.add(vuelo);
             }
             br.close();
 
@@ -32,7 +32,7 @@ public class Leer {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        return Vuelos;
+        return ListaVuelos;
     }
 
     public static TripulacionesOrigen readTripulaciones(String csvFile) {

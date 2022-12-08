@@ -5,7 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tripulacion {
+
+    int IdentificadorTripulacion;
     List<Vuelos> VuelosAsignados;
+
+    int costoAsig;
+
+    Vuelos posicionActual;
 
     public Tripulacion(){
         List<Vuelos> V = new ArrayList<>();
