@@ -1,0 +1,327 @@
+Index: src/TPO/BacktrackingVuelos.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/TPO/BacktrackingVuelos.java b/src/TPO/BacktrackingVuelos.java
+--- a/src/TPO/BacktrackingVuelos.java	
++++ b/src/TPO/BacktrackingVuelos.java	
+@@ -8,62 +8,62 @@
+ import java.util.List;
+ 
+ public class BacktrackingVuelos {
+-    public static VuelosCostoTripulacion BV(InterfazGrafo GVuelos,List<Vuelos> ListaVuelosCompleta, String AeropuertoOrigen, , List<Vuelos> VuelosTotales, int CostoA, int MejorCostoPorTripulacion, int CostoTotal, int largoA, String AeropuetoActual, VuelosCostoTripulacion MejorSolucion, LocalDateTime HoraActual, List<Tripulacion> Tripulaciones) throws ParseException {
+-
+-        //podemos pasar la lista de todos los vuelos
+-        while (!ListaVuelosCompleta.isEmpty()){
+-            GenerarHijos(GVuelos,AeropuetoActual,Tripulaciones,VuelosTotales);
+-
++    public static VuelosCostoTripulacion BV(String AeropuertoActual, List<Tripulacion> Tripulaciones, List<Vuelos> vuelosUsados, List<Vuelos> VuelosTotales) throws ParseException {
++        List<Vuelos> ListaVuelosAUX= new ArrayList<>();
++        ListaVuelosAUX.addAll(VuelosTotales);
++        ListaVuelosAUX.removeAll(vuelosUsados);
++        while (!ListaVuelosAUX.isEmpty()){ //recorrer hasta que no queden mas vuelos.
++            GenerarHijos(AeropuertoActual,Tripulaciones,VuelosTotales);//ramificar
++            //podar, poda implicita(no anadir aquellos que no mejoren la solucion actual.
+         }
+-        return MejorSolucion;//cuando no hay mas vuelos libres
++        return null;//cuando no hay mas vuelos libres
+     }
+ 
+-    public static List<Asignacion> GenerarHijos(InterfazGrafo G, String AeropuetoActual, List<Tripulacion> Tripulaciones, List<Vuelos> VuelosTotales) throws ParseException {
+-        List<Vuelos> Posib = PosiblesVuelosATomar( G, AeropuetoActual, Tripulaciones, VuelosTotales);
++    public static List<Asignacion> GenerarHijos(String AeropuetoActual, List<Tripulacion> Tripulaciones, List<Vuelos> VuelosTotales) throws ParseException {
++        List<Vuelos> Posib = PosiblesVuelosATomar(AeropuetoActual, Tripulaciones, VuelosTotales);
+         List<Asignacion> hijos = new ArrayList<>();
+         List<Vuelos> vuelosAUX = new ArrayList<>();
+         vuelosAUX.addAll(VuelosTotales);
+         for (Vuelos vuelo: Posib){
++            System.out.println(vuelo.getAll());
+             for (Tripulacion T: Tripulaciones){
+                  if (T.PuedoHacerVuelo(vuelo)){//ESTOY PARADO EN EL MISMO AEROPUERTO
+                      Asignacion Asig = new Asignacion();
+                      Asig.setTripulacion(Tripulaciones.indexOf(T));
+                      Asig.setVueloAsignado(vuelo);
+-                     vuelosAUX.remove(vuelo);
+                      hijos.add(Asig);
+-                 }else if (){//ESTOY PARADO EN DISTINTOS AEROPUERTOS Y TENGO QUE HACER EL CAMINO
++                 }else {
++                     if (PuedoLlegar(vuelo.getAeropuertoOrigen(), vuelosAUX, vuelo.getAeropuertoDestino())) {
++                         if (vuelo.getAeropuertoOrigen() == vuelo.getAeropuertoDestino()){
++                             return null;
++                         } else {
+ 
++                         }
++                     }//ESTOY PARADO EN DISTINTOS AEROPUERTOS Y TENGO QUE HACER EL CAMINO
+                  }
+             }
+         }
++        return null;
+     }
+ 
+-    public static List<Vuelos> PosiblesVuelosATomar(InterfazGrafo G, String AeropuetoActual, List<Tripulacion> Tripulaciones, List<Vuelos> VuelosTotales) throws ParseException {
+-        InterfazConjunto Aeropuertos = G.Vertices();
++    public static List<Vuelos> PosiblesVuelosATomar(String AeropuetoActual, List<Tripulacion> Tripulaciones, List<Vuelos> VuelosTotales) throws ParseException {
+         List<Vuelos> Posibles = new ArrayList<Vuelos>();
+         boolean utilizado = false;
+-        for (int j = 0; j<Aeropuertos.Size(); j++){
+-            for (Tripulacion T: Tripulaciones) {
+-                for (Vuelos vuelo : T.VuelosAsignados) {
+-                    if (vuelo == G.VueloArista(AeropuetoActual, Aeropuertos.Elegir())) {
+-                        utilizado = true;
+-                    }
+-                }
+-            }
+-            if (!utilizado) {
+-                Posibles.add(G.VueloArista(AeropuetoActual, Aeropuertos.Elegir()));
+-            }
+-            Aeropuertos.Sacar(Aeropuertos.Elegir());
+-        }
++        for (Vuelos v: VuelosTotales){
++            for (Tripulacion t : Tripulaciones){
++
++            };
++        };
+         return Posibles;
+     }
+ 
+-    public boolean PuedoLlegar(String AeropuertoOrigen/*t2.origen*/, List<Vuelos> VuelosNoAsignados, String AeropuertoDestino/*vuelo.origen*/){
++    public static boolean PuedoLlegar(String AeropuertoOrigen/*t2.origen*/, List<Vuelos> VuelosNoAsignados, String AeropuertoDestino/*vuelo.origen*/){
+         /**/
+ 
+         /*else if
+         * caminoMasCorto COMO EL TSP*/
+ 
++        return false;
+     }
+ 
+ }
+Index: src/TPO/Leer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/TPO/Leer.java b/src/TPO/Leer.java
+--- a/src/TPO/Leer.java	
++++ b/src/TPO/Leer.java	
+@@ -44,15 +44,14 @@
+             FileReader fr = new FileReader(file);
+             BufferedReader br2 = new BufferedReader(fr);
+             String line = " ";
+-            String[] tempArr;
++            String[] tempArr2;
+             while ((line = br2.readLine()) != null) {
++                tempArr2 = line.split(delimiter);
++                TO.setOrigen(tempArr2[1]);
+                 i++;
+-                tempArr = line.split(delimiter);
+-                O = tempArr[1];
+             }
+             br2.close();
+             TO.setTripulaciones(i);
+-            TO.setOrigen(O);
+ 
+         } catch (IOException ioe) {
+             ioe.printStackTrace();
+Index: src/TPO/Tripulacion.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/TPO/Tripulacion.java b/src/TPO/Tripulacion.java
+--- a/src/TPO/Tripulacion.java	
++++ b/src/TPO/Tripulacion.java	
+@@ -3,6 +3,7 @@
+ import java.time.temporal.ChronoUnit;
+ import java.util.ArrayList;
+ import java.util.List;
++import java.util.Objects;
+ 
+ public class Tripulacion {
+     List<Vuelos> VuelosAsignados;
+@@ -16,7 +17,7 @@
+     }
+ 
+     public boolean PuedoHacerVuelo(Vuelos vuelo) {
+-        return vuelo.getAeropuertoOrigen() == VuelosAsignados.get(VuelosAsignados.size() - 1).getAeropuertoDestino();
++        return Objects.equals(vuelo.getAeropuertoOrigen(), VuelosAsignados.get(VuelosAsignados.size() - 1).getAeropuertoDestino());
+     }
+ 
+     public int CostoTripulacion(){
+Index: Tripulaciones.csv
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Tripulaciones.csv b/Tripulaciones.csv
+--- a/Tripulaciones.csv	
++++ b/Tripulaciones.csv	
+@@ -1,2 +1,1 @@
+-A1,AEROPARQUE
+-
++A1,AEROPARQUE
+\ No newline at end of file
+Index: src/TPO/Metodos/GrafoDinamicoE1.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/TPO/Metodos/GrafoDinamicoE1.java b/src/TPO/Metodos/GrafoDinamicoE1.java
+--- a/src/TPO/Metodos/GrafoDinamicoE1.java	
++++ b/src/TPO/Metodos/GrafoDinamicoE1.java	
+@@ -65,8 +65,9 @@
+ 
+     private NodoGrafo Vert2Nodo(String v) {
+         NodoGrafo aux = origen;
+-        while(aux !=null && aux.nodo != v)
++        while(aux != null && aux.nodo != v){
+             aux = aux.sigNodo;
++        }
+         return aux;
+     }
+ 
+@@ -94,8 +95,6 @@
+         Vuelos A = new Vuelos();
+         A.setAeropuertoOrigen(aux.Vuelo.getAeropuertoOrigen());
+         A.setAeropuertoDestino(aux.Vuelo.getAeropuertoDestino());
+-        A.setInicioConDate(aux.Vuelo.getInicio());
+-        A.setFinConDate(aux.Vuelo.getFin());
+         return A;
+     }
+ 
+Index: Vuelos.csv
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Vuelos.csv b/Vuelos.csv
+--- a/Vuelos.csv	
++++ b/Vuelos.csv	
+@@ -1,3 +1,3 @@
+ AR 1882,AEROPARQUE,USHUAIA,21/10/2022 03:55,21/10/2022 09:15
+ AR 1992,USHUAIA,MDP,21/10/2022 11:15,21/10/2022 14:55
+-AR 1774,MDP,AEROPARQUE,21/10/2022 19:25, 21/10/2022 20:25
++AR 1774,MDP,AEROPARQUE,21/10/2022 19:25,21/10/2022 20:25
+\ No newline at end of file
+Index: src/TPO/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/TPO/Main.java b/src/TPO/Main.java
+--- a/src/TPO/Main.java	
++++ b/src/TPO/Main.java	
+@@ -1,34 +1,45 @@
+ package TPO;
+ 
++import TPO.Intefaz.InterfazConjunto;
+ import TPO.Intefaz.InterfazGrafo;
++import TPO.Metodos.ConjuntoDE1;
+ import TPO.Metodos.GrafoDinamicoE1;
+ 
++import java.text.ParseException;
+ import java.util.ArrayList;
+ import java.util.Date;
+ import java.util.List;
+ 
+ public class Main {
+-    public static void main(String[] args) {
++    public static void main(String[] args) throws ParseException {
+         String csvFile = "Vuelos.csv";
+         List<Vuelos> v = Leer.read(csvFile);
+         String csvFile2 = "Tripulaciones.csv";
+         TripulacionesOrigen Tripulaciones = Leer.readTripulaciones(csvFile2);//DE DONDE SALE CADA TRIPULACION Y CUANTAS SON
+ 
++        /*
+         InterfazGrafo GV = CrearGrafoVuelos(v);//GRAFO DE AEROPUERTOS
++        InterfazConjunto verticesGrafo = GV.Vertices();
++        while (!verticesGrafo.ConjuntoVacio()){
++            System.out.println(GV.VueloArista(Tripulaciones.getOrigen(), verticesGrafo.Elegir()));
++            verticesGrafo.Sacar(verticesGrafo.Elegir());
++        }
++        */
+         List<Tripulacion> ListaTripulaciones = new ArrayList<>();
+-        for (int i = 0; i< Tripulaciones.getTripulaciones(); i++){//la posicion el la lista es el identificador
++        for (int i = 0; i< Tripulaciones.getTripulaciones(); i++){//la posicion en la lista es el identificador
+             Tripulacion T = new Tripulacion();
+             ListaTripulaciones.add(T);
+-        }
+-
+-
++        };
+ 
+         int GastoTotal = 0;
+ 
+         VuelosCostoTripulacion VuelosResultado = new VuelosCostoTripulacion();//INICIAMOS LA VARIABLE DE DEVOLUCION
+ 
++        List<Vuelos> vuelosUsados = new ArrayList<>();
++        salidaTripulacion(ListaTripulaciones, Tripulaciones.getOrigen(), vuelosUsados, v);
++
+         VuelosResultado.InicializarVuelosCostoTripulacion(Tripulaciones.getTripulaciones()); //REINICIALIZAMOS EL OBJETO A VALORES SIN NADA Y 0
+-        VuelosResultado = BacktrackingVuelos.BV(GV,Tripulaciones.getOrigen(),VuelosResultado);
++        VuelosResultado = BacktrackingVuelos.BV(Tripulaciones.getOrigen(),ListaTripulaciones, vuelosUsados, v);
+             //EL CODIGO DE BACKTRACKING DEVUELVE UN OBJETO QUE TIENE LOS VUELOS QUE TOMO LA TRIPULACION Y EL COSTO QUE PRESENTO LA TRIPULACION
+ 
+             //MOSTRADO DE RESULTADO
+@@ -39,23 +50,40 @@
+ 
+     }
+ 
+-    private static InterfazGrafo CrearGrafoVuelos(List<Vuelos> v) {
++    private static void salidaTripulacion(List<Tripulacion> listaTripulaciones, String origen, List<Vuelos> vuelosUsados, List<Vuelos> listaVuelosCompleta) throws ParseException {
++        for (Tripulacion t: listaTripulaciones){
++            for (Vuelos v: listaVuelosCompleta){
++                if (!vuelosUsados.contains(v)){
++                    if (v.getAeropuertoOrigen() == origen){
++                        t.agregarVuelo(v);
++                        vuelosUsados.add(v);
++                        break;
++                    };
++                };
++            };
++        };
++    };
++
++   /* private static InterfazGrafo CrearGrafoVuelos(List<Vuelos> v) throws ParseException {
+         InterfazGrafo GV = new GrafoDinamicoE1();
+         GV.InicializarGrafo();
+         for (int i = 0; i< v.size();i++){
+             Vuelos VUELO = v.get(i);
+             if (!GV.Vertices().Pertenece(VUELO.getAeropuertoOrigen())){
+                 GV.AgregarVertice(VUELO.getAeropuertoOrigen());
++                //System.out.println(!GV.Vertices().Pertenece(VUELO.getAeropuertoOrigen()));
+             }
+-            if (!GV.Vertices().Pertenece(VUELO.getAeropuertoDestino())){
++            if (!GV.Vertices().Pertenece(VUELO.getAeropuertoDestino())) {
+                 GV.AgregarVertice(VUELO.getAeropuertoDestino());
++                //System.out.println(!GV.Vertices().Pertenece(VUELO.getAeropuertoDestino()));
+             }
+             for (Vuelos vuelos : v) {
+                 if (vuelos.getAeropuertoOrigen() == VUELO.getAeropuertoOrigen()) {
+                     GV.AgregarAristas(VUELO.getAeropuertoOrigen(), VUELO.getAeropuertoDestino(), vuelos);
++                    System.out.println(GV.VueloArista(VUELO.getAeropuertoOrigen(), VUELO.getAeropuertoDestino()));
+                 }
+             }
+         }
+         return GV;
+-    }
++    }*/
+ }
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	
++++ b/.idea/misc.xml	
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="openjdk-18" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_18" default="true" project-jdk-name="openjdk-18" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
